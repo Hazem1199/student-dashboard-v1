@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/brands.min.css"
+    integrity="sha512-L+sMmtHht2t5phORf0xXFdTC0rSlML1XcraLTrABli/0MMMylsJi3XA23ReVQkZ7jLkOEIMicWGItyK4CAt2Xw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./css/framework.css">
+  <link rel="stylesheet" href="./css/master.css">
+  <title>Dashboard</title>
+</head>
+
+<body>
+  <div class="page d-flex">
+    <div class="sidebar p-20 bg-white p-relative">
+      <!-- list of sidebar -->
+      <h3 class="p-relative mt-0 txt-c">Brooklyn B.S</h3>
+      <ul>
+        <li>
+          <a class="d-flex align-center fs-14 c-black rad-6 p-10" href="./index.html">
+            <i class="fa-solid fa-chart-bar fa-fw"></i>
+            <span class="ml-5 hide-mobile fs-14">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a class="active d-flex align-center fs-14 c-black rad-6 p-10" href="./SRM.html">
+            <i class="fa-solid fa-circle-info fa-fw"></i>
+            <span class="ml-5 hide-mobile fs-14">Srm</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="content w-full">
+      <!--start head  -->
+      <div class="head p-15 bg-white between-flex">
+        <div class="searchCon">
+          <div class="search p-relative">
+            <input  class="rad-15" type="search" id="searchInput" name="search" placeholder="Write ID....">
+          </div>
+            <div class="search-container">
+              <button class="search-button"><i class="fa fa-search"></i></button>
+            </div>
+        </div>
+        <div class="icons d-flex align-center">
+          <span class="notification p-relative">
+            <i class="fa-regular fa-bell fa-lg"></i>
+          </span>
+          <img src="./imgs/IMG_8222.png" alt="person">
+        </div>
+      </div>
+      <!-- <h1 class="p-relative">Profile</h1> -->
+      <div class="profile-page m-20">
+        <!-- Start Overview -->
+        <div class="overview bg-white rad-10 d-flex align-center">
+          <div class="avatar-box txt-c p-20">
+            <img id="profile-pic" class="rad-half mb-10" src="" alt="" />
+            <h5 class="m-0 headName"></h5>
+            <p class="c-grey mt-10">70%</p>
+            <div class="level rad-6 bg-eee p-relative">
+              <span style="width: 70%"></span>
+            </div>
+
+          </div>
+          <div class="info-box w-full txt-c-mobile">
+            <!-- Start Information Row -->
+            <div class="box p-20 d-flex align-center">
+              <h4 class="c-grey fs-15 m-0 w-full">General & Personal Information</h4>
+              <div class="fs-14" id="FN">
+                <span class="c-grey">Full Name:</span>
+                <span class="fName"> </span>
+              </div>
+              <div class="fs-14">
+                <span class="c-grey">Student No:</span>
+                <span class="ID"> </span>
+              </div>
+              <div class="fs-14">
+                <span class="c-grey">Email:</span>
+                <span class="Email"></span>
+              </div>
+              <div class="fs-14">
+                <span class="c-grey">ID Number:</span>
+                <span></span>
+              </div>
+              <div class="fs-14">
+                <span class="c-grey">Phone:</span>
+                <span class="Phone"></span>
+              </div>
+              <div class="fs-14">
+                <span class="c-grey">Date Of Birth:</span>
+                <span></span>
+              </div>
+  
+            </div>
+   
+              
+      
+            <div class="box p-20 d-flex align-center">
+              <h4 class="c-grey w-full fs-15 m-0">Scolarship & Reserv Information</h4>
+              <div class="fs-14">
+                <span class="c-grey">Last Scolarship:</span>
+                <span>TQM</span>
+              </div>
+              <div class="fs-14">
+                <span class="c-grey">Grade:</span>
+                <span>Good</span>
+              </div>
+              <div class="fs-14">
+                <span class="c-grey">Company - Scholarship Code:</span>
+                <span>????</span>
+              </div>
+              <div class="fs-14">
+                <span class="c-grey">Receptionist:</span>
+                <span>dalia</span>
+              </div>
+              <div class="fs-14">
+                <span class="c-grey">Reserver:</span>
+                <span>Donia</span>
+              </div>
+              <div class="fs-14">
+                <span class="c-grey">CC Agent:</span>
+                <span>sabry</span>
+              </div>
+             
+            </div>
+            
+            <!-- End Information Row -->
+          </div>
+        </div>
+        <!-- End Overview -->
+        <!-- Start Other Data -->
+        <div class="other-data  gap-20">
+          <div class="skills-card bg-blue rad-10 p-10"> 
+            
+              <!-- list of sidebar -->
+              <ul class="d-flex m-0">
+                <li>
+                  <a class=" d-flex align-center fs-14 c-black rad-6 p-10 c-white" href="Request.html">
+                    <span class="ml-5 hide-mobile fs-14">Requests</span>
+                  </a>
+                </li>
+                <li>
+                  <a class=" d-flex align-center fs-14 c-black rad-6 p-10 c-white" href="Complaint.html">
+                    <span class="ml-5 hide-mobile fs-14">Complaint</span>
+                  </a>
+                </li>
+                <li>
+                  <a class=" d-flex align-center fs-14 c-black rad-6 p-10 c-white" href="Deadlines.html">
+                    <span class="ml-5 hide-mobile fs-14">Deadlines</span>
+                  </a>
+                </li>
+                <li>
+                  <a class=" d-flex align-center fs-14 c-black rad-6 p-10 c-white" href="Attendance.html">
+                    <span class="ml-5 hide-mobile fs-14">Attendance</span>
+                  </a>
+                </li>
+                <li>
+                  <a class=" d-flex align-center fs-14 c-black rad-6 p-10 c-white" href="Group.html">
+                    <span class="ml-5 hide-mobile fs-14">Groups</span>
+                  </a>
+                </li>
+              </ul>
+            
+            
+          </div>
+          <div class="activities p-20 bg-white rad-10 mt-20">
+            <div class="box">
+              <h2 class="mt-0 mb-10">Deadlines</h2>
+            <!-- <button id="openPopupButton">Add Request</button> -->
+            
+            <!-- popup
+            <div id="popupContainer">
+              <div id="popup">
+                <form id="myForm" onsubmit="Action()">
+                  <label for="inputField">Request:</label>
+                  <input type="text" id="Request" name="Request">
+                  <br>
+                  <input type="submit" value="Submit">
+                </form>
+              </div>
+            </div>
+             -->
+
+            </div>
+            <div class="divTable paleBlueRows ">
+              <div class="divTableHeading txt-c-mobile">
+                <div class="divTableRow">
+                  <div class="divTableHead">Due Date</div>
+                  <div class="divTableHead">Amount</div>
+                  <div class="divTableHead">Status</div>
+                </div>
+              </div>
+              <div class="divTableBody">
+                <div class="divTableRow">
+                  <div id="Due-Date" class="divTableCell"></div>
+                  <div id="Amount" class="divTableCell"></div>
+                  <div id="Status" class="divTableCell"></div>
+                </div>
+              </div>
+              
+            
+          </div>
+        </div>
+        <!-- End Other Data -->
+      </div>
+    </div>
+  </div>
+
+  <script src="./js pages/main.js"></script>
+  <script src="./js pages/deadlines.js"></script>
+
+</body>
+
+</html>
