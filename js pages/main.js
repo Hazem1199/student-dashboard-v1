@@ -47,9 +47,6 @@ async function display(value) {
     });
 }
 
-Complaint.addEventListener('click', (event) => {
-    event.preventDefault();
-});
 
 
 searchButton.addEventListener('click', () => {
