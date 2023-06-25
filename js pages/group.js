@@ -1,80 +1,203 @@
-var searchInput = document.getElementsByName("search");
-var fName = document.querySelector(".fName");
-var body = document.getElementById("body");
-var infoBox = document.getElementsByClassName("info-box")
-var Email = document.querySelector('.Email');
-var Phone = document.querySelector('.Phone');
-var ID = document.querySelector('.ID');
-var Requests = document.getElementById('Requests');
-var Complaint = document.getElementById('Complaint');
-var searchButton = document.querySelector('.search-button');
-var pic = document.getElementById("profile-pic")
-var headName = document.querySelector('.headName') 
+async function getInfoGroup(id) {
+    // const baseUrl = 'https://script.google.com/macros/s/AKfycbyBpgJd3o4DNSd7korkuPXGRSGh6ryS-fPRY0N1XRivyiHDw-U7YXz65VzuUdJ3i7Bk/exec';
+    // let url = baseUrl;
+    // if (id) {
+    //     url += `?id=${id}`;
+    // }
+    // const response = await fetch(url);
+    // if (!response.ok) {
+    //     throw new Error(`Failed to fetch data from API: ${response.status}`);
+    // } else {
+    //     console.log("fetch Done");
+    //     const data = await response.json();
+    //     return data;
+    // }
+  const response = await  fetch('https://script.google.com/macros/s/AKfycbwAIsY5c7ebcjrDN58-l097iqHF-_Rd6gChIbA4rcKggLD0qgVP95fgm2oHS8FjhxM5Iw/exec', {
+        method: 'POST',
+        body: JSON.stringify({ "id": id })
+    })
+                var data = await response.json();
+                console.log(data);
+                 return data;
+
+}
+
+async function showAllGroup(id) {
+    try {
+        const groups = await getInfoGroup(id);
+        let tableBody = document.querySelector('.divTableBody');
+        tableBody.innerHTML = '';
+        //let i = 0;
+        // console.log("group.ID" +group.ID);
+        console.log("id" + id);
+
+        groups.filter(group => group.ID == id).forEach(async group => {
+            // if (group.ID === id) {
+            console.log(group);
+                
+            var student = {
+                
+                Group1: group[`g1`],
+                Module1: group[`g1 module`],
+                Date1: group[`g1 date`],
+                grade1: group[`g1 grade`],
+                attendance1: group[`g1 attendance`],
+                Group2: group[`g2`],
+                Module2: group[`g2 module`],
+                Date2: group[`g2 date`],
+                grade2: group[`g2 grade`],
+                attendance2: group[`g2 attendance`],
+                Group3: group[`g3`],
+                Module3: group[`g3 module`],
+                Date3: group[`g3 date`],
+                grade3: group[`g3 grade`],
+                attendance3: group[`g3 attendance`],
+                Group4: group[`g4`],
+                Module4: group[`g4 module`],
+                Date4: group[`g4 date`],
+                grade4: group[`g4 grade`],
+                attendance4: group[`g4 attendance`],
+                Group5: group[`g5`],
+                Module5: group[`g5 module`],
+                Date5: group[`g5 date`],
+                grade5: group[`g5 grade`],
+                attendance5: group[`g5 attendance`],
+                Group6: group[`g6`],
+                Module6: group[`g1 module`],
+                Date6: group[`g6 date`],
+                grade6: group[`g6 grade`],
+                attendance6: group[`g6 attendance`],
+                Group7: group[`g7`],
+                Module7: group[`g7 module`],
+                Date7: group[`g7 date`],
+                grade7: group[`g7 grade`],
+                attendance7: group[`g7 attendance`],
+                Group8: group[`g8`],
+                Module8: group[`g8 module`],
+                Date8: group[`g8 date`],
+                grade8: group[`g8 grade`],
+                attendance8: group[`g8 attendance`],
+                Group9: group[`g9`],
+                Module9: group[`g9 module`],
+                Date9: group[`g9 date`],
+                grade9: group[`g9 grade`],
+                attendance9: group[`g9 attendance`],
+                Group10: group[`g10`],
+                Module10: group[`g10 module`],
+                Date10: group[`g10 date`],
+                grade10: group[`g10 grade`],
+                attendance10: group[`g10 attendance`],
+                Group11: group[`g11`],
+                Module11: group[`g11 module`],
+                Date11: group[`g11 date`],
+                grade11: group[`g11 grade`],
+                attendance11: group[`g11 attendance`],
+                Group12: group[`g12`],
+                Module12: group[`g12 module`],
+                Date12: group[`g12 date`],
+                grade12: group[`g12 grade`],
+                attendance12: group[`g12 attendance`]
+
+            };
+
+            for (var i = 1 ; i <= 12 ; i++){
+                let row = document.createElement('tr')
+                row.classList.add('divTableRow');
+                
+                // Set the date to i days after the original date
+                let dateProp = `Date${i}`;
+                const date = new Date(student[dateProp]);
+                // date.setDate(date.getDate() - 1);
+                const options = { year: 'numeric', month: 'short', day: 'numeric' };
+                const formattedDate = date.toLocaleDateString(undefined, options);
+                // let newDate = new Date(student[dateProp]);
+                // newDate.setDate(newDate.getDate() + i);
+                
+                // Get the properties for the current group
+                let groupProp = `Group${i}`;
+                let moduleProp = `Module${i}`;
+                let gradeProp = `grade${i}`;
+                let attendanceProp = `attendance${i}`;
+                let group = student[groupProp];
+                let module = student[moduleProp];
+                let grade = student[gradeProp];
+                let attendance = student[attendanceProp];
+                
+                row.innerHTML=`
+                  <td>${formattedDate}</td>
+                  <td>${group}</td>
+                  <td>${module}</td>
+                  <td>${grade}</td>
+                  <td>${attendance}</td>
+                `
+                // Append the row to the table
+                document.querySelector('.divTableBody').appendChild(row);
+              }
+            
+                
+            // let row = document.createElement('div');
+            // row.classList.add('divTableRow');
+            // let dateCell = document.createElement('div');
+            // dateCell.classList.add('divTableCell');
+            // dateCell.textContent = student.Date;
+            // row.appendChild(dateCell);
+            // let groupCell = document.createElement('div');
+            // groupCell.classList.add('divTableCell');
+            // groupCell.textContent = student.Group;
+            // row.appendChild(groupCell);
+            // let moduleCell = document.createElement('div');
+            // moduleCell.classList.add('divTableCell');
+            // moduleCell.textContent = student.Module;
+            // row.appendChild(moduleCell);
+            // let gradeCell = document.createElement('div');
+            // gradeCell.classList.add('divTableCell');
+            // gradeCell.textContent = student.grade;
+            // row.appendChild(gradeCell);
+            // let attendanceCell = document.createElement('div');
+            // attendanceCell.classList.add('divTableCell');
+            // attendanceCell.textContent = student.attendance;
+            // row.appendChild(dateCell);
+            // tableBody.appendChild(row);
+            // // }
+        })
+    } catch (error) {
+        console.log(error);
+    }
 
 
 
-
-async function getInfoGroup() {
-    const url = 'https://script.googleusercontent.com/macros/echo?user_content_key=7BZg2HTM-CuSep6QzuIXJ3Xl0eNPHaiYYOGOgBUn6l15PZzf9xlXSA1BY5261jVtlpaqVCeFPLIx0iuLcybOrW2QVtmWffmym5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnNLMoutvLfw7y6bj32pLZwsHISRMuAqqcl6hkcLpv9YAfKs1vDSyaf6TAQ6C8JSO4uPd2WEWpo-umHqw3fOhQROmdRiLKrJvww&lib=MQfVKFgVXIr2Rm9shkxeT9DVOmtUjdkhJ';    response = await fetch(url);
-    data = await response.json();
-    // console.log(data[0].Name);
-    return data;
 }
 
 
 
 
-async function showGroup(value) {
-    var students = await getInfoGroup();
-    // console.log(students);
-    const body = document.querySelector('body')
-    const tableBody = document.querySelector('.divTableBody');
-    // Remove all existing rows from the table
-    while (tableBody.firstChild) {
-        tableBody.removeChild(tableBody.firstChild);
+
+const params = new URLSearchParams(window.location.search);
+const id = params.get('id');
+showAllGroup(id);
+
+
+
+window.onload = function () {
+    const sidebar = document.querySelector(".sidebar");
+    const closeBtn = document.querySelector("#btn");
+    const searchBtn = document.querySelector(".bx-search")
+  
+    closeBtn.addEventListener("click", function () {
+      sidebar.classList.toggle("open")
+      menuBtnChange()
+    })
+  
+    searchBtn.addEventListener("click", function () {
+      sidebar.classList.toggle("open")
+      menuBtnChange()
+    })
+  
+    function menuBtnChange() {
+      if (sidebar.classList.contains("open")) {
+        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right")
+      } else {
+        closeBtn.classList.replace("bx-menu-alt-right", "bx-menu")
+      }
     }
-
-    // Create spinner element
-    const spinner = document.createElement('div');
-    spinner.classList.add('spinner');
-    document.body.appendChild(spinner);
-
-    for (let i = 1; i <= 12; i++) {
-        students.forEach(element => {
-            if (value == element.ID) {
-                let student = { Group: element[`g${i}`], Module: element[`g${i} module`] }
-                console.log(student);
-                const newRow = document.createElement('tr');
-                const moduleCell = document.createElement('td');
-                const groupCell = document.createElement('td');
-                newRow.appendChild(groupCell);
-                newRow.appendChild(moduleCell);
-                moduleCell.innerHTML = student.Module;
-                groupCell.innerHTML = student.Group;
-                tableBody.appendChild(newRow);
-            }
-        });
-    }
-
-    // Hide spinner element
-    document.body.removeChild(spinner);
-}
-
-
-
-
-const page = document.querySelector('body');
-
-
-page.addEventListener('click', (event) => {
-    if (event.target !== searchInput) {
-        const tableBody = document.querySelector('.divTableBody');
-        tableBody.innerHTML = ""; // حذف جميع الصفوف في الجدول
-    }
-});
-
-searchButton.addEventListener('click', () => {
-    const value = searchInput[0].value;
-    showGroup(value);
-});
-
+  }

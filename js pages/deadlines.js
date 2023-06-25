@@ -1,15 +1,15 @@
-var searchInput = document.getElementsByName("search");
-var fName = document.querySelector(".fName");
-var body = document.getElementById("body");
-var infoBox = document.getElementsByClassName("info-box")
-var Email = document.querySelector('.Email');
-var Phone = document.querySelector('.Phone');
-var ID = document.querySelector('.ID');
-var Requests = document.getElementById('Requests');
-var Complaint = document.getElementById('Complaint');
-var searchButton = document.querySelector('.search-button');
-var pic = document.getElementById("profile-pic")
-var headName = document.querySelector('.headName') 
+// var searchInput = document.getElementsByName("search");
+// var fName = document.querySelector(".fName");
+// var body = document.getElementById("body");
+// var infoBox = document.getElementsByClassName("info-box")
+// var Email = document.querySelector('.Email');
+// var Phone = document.querySelector('.Phone');
+// var ID = document.querySelector('.ID');
+// var Requests = document.getElementById('Requests');
+// var Complaint = document.getElementById('Complaint');
+// var searchButton = document.querySelector('.search-button');
+// var pic = document.getElementById("profile-pic")
+// var headName = document.querySelector('.headName') 
 
 
 
@@ -29,7 +29,7 @@ async function showDeadlines(value) {
     var students = await getInfoDeadlines();
     // console.log(students);
     const body = document.querySelector('body')
-    const tableBody = document.querySelector('.divTableBody');
+    const tableBody = document.querySelector('.tbody1');
     // Remove all existing rows from the table
     while (tableBody.firstChild) {
         tableBody.removeChild(tableBody.firstChild);
@@ -61,11 +61,11 @@ async function showDeadlines(value) {
             if (student.Status === "paid") {
                 img.src = "./imgs/download.png";
                 img.alt = "paid";
-                img.style.width = "3%";
+                img.style.width = "7%";
             } else if (student.Status === "unpaid") {
                 img.src = "./imgs/png-transparent-computer-icons-ok-miscellaneous-trademark-cross.png";
                 img.alt = "unpaid";
-                img.style.width = "3%";
+                img.style.width = "7%";
             }
             StatusCell.appendChild(img);
             tableBody.appendChild(newRow);
