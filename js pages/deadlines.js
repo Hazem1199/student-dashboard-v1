@@ -27,13 +27,38 @@ async function getInfoDeadlines() {
 
 async function showDeadlines(value) {
     var students = await getInfoDeadlines();
+    const numDeadline = document.querySelector('.num-deadline');
+    const footer3 = document.querySelector('.footer3');
+    let filteredDeadlines = students.filter(student => student.ID == value);
+    let deadlineCount = filteredDeadlines.length;
+    console.log(deadlineCount);
+    const numberOfPaidDeadlines = filteredDeadlines.filter(student => student.Status === "paid").length;
+    // const numberOfUnpaidDeadlines = filteredDeadlines.filter(student => student.Status === "unpaid").length;
+    console.log(numberOfPaidDeadlines);
+    const deadlines = filteredDeadlines.sort((a, b) => new Date(a["Due Date"]) - new Date(b["Due Date"]));
+    const now = new Date();
+    const nextDeadline = deadlines.find(deadline => new Date(deadline["Due Date"]) > now);
+    if (numberOfPaidDeadlines === deadlineCount) {
+        const numberOfUnpaidDeadlines = deadlineCount
+    numDeadline.textContent = `${numberOfUnpaidDeadlines} / ${deadlineCount}`;
+    footer3.textContent = "No upcoming deadlines";
+    }else {
+    // const numberOfUnpaidDeadlines = deadlineCount - numberOfPaidDeadlines;
+    numDeadline.textContent = `${numberOfPaidDeadlines} / ${deadlineCount}`;
+    const formattedDueDate = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' , year: 'numeric'}).format(new Date(nextDeadline["Due Date"]));
+        footer3.textContent = `Next deadline: ${formattedDueDate}`;
+}
+
+
+
+
     // console.log(students);
-    const body = document.querySelector('body')
-    const tableBody = document.querySelector('.tbody1');
-    // Remove all existing rows from the table
-    while (tableBody.firstChild) {
-        tableBody.removeChild(tableBody.firstChild);
-    }
+    // const body = document.querySelector('body')
+    // const tableBody = document.querySelector('.tbody1');
+    // // Remove all existing rows from the table
+    // while (tableBody.firstChild) {
+    //     tableBody.removeChild(tableBody.firstChild);
+    // }
 
     // Create spinner element
     const spinner = document.createElement('div');
@@ -68,14 +93,29 @@ async function showDeadlines(value) {
                 img.style.width = "7%";
             }
             StatusCell.appendChild(img);
-            tableBody.appendChild(newRow);
+            // tableBody.appendChild(newRow);
         }
     });
 
 
     // Hide spinner element
     document.body.removeChild(spinner);
+
+
+    // const filteredDeadlines = students.filter(student => student.ID === value);
+
+    // const numberOfDeadlines = filteredDeadlines.length;
+    // console.log(numberOfDeadlines);
+
+    // const numberOfPaidDeadlines = filteredDeadlines.filter(student => student.Status === "paid").length;
+    // console.log(numberOfPaidDeadlines);
+
+    // const numberOfUnpaidDeadlines = numberOfDeadlines - numberOfPaidDeadlines;
+
+    // const numDeadline = document.querySelector('.num-deadline');
+    // numDeadline.textContent = `${numberOfPaidDeadlines} paid / ${numberOfUnpaidDeadlines} unpaid`;
 }
+
 
 
 

@@ -15,7 +15,9 @@ var pic = document.getElementById("profile-pic")
 var headName = document.querySelector('.headName')
 
 
-console.log(searchButton)
+function change() {
+   document.getElementById("PreLoaderBar").style.display = "block";
+}
 
 async function getData() {
    const url = `https://script.googleusercontent.com/macros/echo?user_content_key=RmImvI_1fBKSBc3BQRgZcd0pMbjoi2WPy7p8Gl-jp1FanUiZpWok-P_1vyqoNtXPIvLoSHB-YR6TuynDKaFmUU3U4gEeuheZm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnGs-e9gwa0Ae-WtYW7QGGv96K2sSkHDFYJixQ8WV4H0jDu1Qf_oSHKRcYFtRYbNxLCfJ3zQRKTiXpDt6znfr0IuyTQ8p70QBO9z9Jw9Md8uu&lib=MQfVKFgVXIr2Rm9shkxeT9DVOmtUjdkhJ`;
@@ -24,10 +26,9 @@ async function getData() {
    // console.log(data[0].Name);
    return data;
 }
-// var test = getData();
-// console.log(test);
 
 async function display(value) {
+   change();
    var users = await getData();
    //console.log(users);
 
@@ -44,17 +45,15 @@ async function display(value) {
          console.log(pic.src);
       }
    });
+   // Hide the preloader when the page has finished loading
+   document.getElementById("PreLoaderBar").style.display = "none";
 }
 
-
-
-searchButton.addEventListener('click', () => {
+searchButton.addEventListener('click', (e) => {
+   e.preventDefault();
    const value = searchInput[0].value;
    display(value);
 });
-
-
-
 
 window.onload = function () {
    const sidebar = document.querySelector(".sidebar");
@@ -78,8 +77,6 @@ window.onload = function () {
          closeBtn.classList.replace("bx-menu-alt-right", "bx-menu")
       }
    }
+
+   
 }
-
-
-
-
