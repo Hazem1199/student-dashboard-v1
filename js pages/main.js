@@ -13,11 +13,31 @@ var Complaint = document.querySelector('#Complaint');
 var searchButton = document.querySelector('.search-button');
 var pic = document.getElementById("profile-pic")
 var headName = document.querySelector('.headName')
+var loadingDiv = document.querySelector('.loading-div')
 
+var overlay = document.createElement("div");
+overlay.style.position = "fixed";
+overlay.style.display = "none";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.height = "100%";
+overlay.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
+overlay.style.backdropFilter = "blur(5px)";
+overlay.style.zIndex = "1";
+document.body.appendChild(overlay);
 
 function change() {
-   document.getElementById("PreLoaderBar").style.display = "block";
+   loadingDiv.style.display = "block";
+   overlay.style.display = "block";
 }
+
+function hide() {
+   overlay.style.display = "none";
+   loadingDiv.style.display = "none";
+}
+
+
 
 async function getData() {
    const url = `https://script.googleusercontent.com/macros/echo?user_content_key=RmImvI_1fBKSBc3BQRgZcd0pMbjoi2WPy7p8Gl-jp1FanUiZpWok-P_1vyqoNtXPIvLoSHB-YR6TuynDKaFmUU3U4gEeuheZm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnGs-e9gwa0Ae-WtYW7QGGv96K2sSkHDFYJixQ8WV4H0jDu1Qf_oSHKRcYFtRYbNxLCfJ3zQRKTiXpDt6znfr0IuyTQ8p70QBO9z9Jw9Md8uu&lib=MQfVKFgVXIr2Rm9shkxeT9DVOmtUjdkhJ`;
@@ -28,7 +48,7 @@ async function getData() {
 }
 
 async function display(value) {
-   change();
+   change()
    var users = await getData();
    //console.log(users);
 
@@ -45,8 +65,7 @@ async function display(value) {
          console.log(pic.src);
       }
    });
-   // Hide the preloader when the page has finished loading
-   document.getElementById("PreLoaderBar").style.display = "none";
+   hide()
 }
 
 searchButton.addEventListener('click', (e) => {
@@ -78,5 +97,5 @@ window.onload = function () {
       }
    }
 
-   
+
 }
