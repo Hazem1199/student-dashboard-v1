@@ -15,8 +15,6 @@ const footer4 = document.querySelector('.footer4');
 
 
 
-
-
 async function getInfoGroup(id) {
   const response = await fetch('https://script.google.com/macros/s/AKfycbwAIsY5c7ebcjrDN58-l097iqHF-_Rd6gChIbA4rcKggLD0qgVP95fgm2oHS8FjhxM5Iw/exec', {
     method: 'POST',
@@ -35,19 +33,18 @@ async function showGroup(id) {
   const tableBody = document.querySelector('.tbody2');
 
   // Remove all existing rows from the table
-  while (tableBody.firstChild) {
-    tableBody.removeChild(tableBody.firstChild);
-  }
+  // while (tableBody.firstChild) {
+  //   tableBody.removeChild(tableBody.firstChild);
+  // }
 
   // Create spinner element
-  const spinner = document.createElement('div');
-  spinner.classList.add('spinner');
-  document.body.appendChild(spinner);
+  // const spinner = document.createElement('div');
+  // spinner.classList.add('spinner');
+  // document.body.appendChild(spinner);
 
   let totalDoneModules = 0;
   let moduleCount = 0;
   let i;
-
 
   for (let i = 1; i <= 12; i++) {
     students.forEach(student => {
@@ -65,7 +62,7 @@ async function showGroup(id) {
         moduleCell.textContent = student[`g${i} module`];
         groupCell.textContent = student[`g${i}`];
         dateCell.textContent = formattedDate;
-        tableBody.appendChild(newRow);
+        // tableBody.appendChild(newRow);
         moduleCount++;
         if (student[`g${i} grade`]) {
           totalDoneModules++;
@@ -73,28 +70,32 @@ async function showGroup(id) {
       }
     });
   }
-
   // Hide spinner element
-  document.body.removeChild(spinner);
+  // document.body.removeChild(spinner);
 
   // Update the module count
   const moduleCountElement = document.getElementById('moduleCount');
   moduleCountElement.textContent = `${totalDoneModules} / ${moduleCount}`;
-    // Update the footer based on the next module deadline
-    const filteredModules = students.filter(student => {
-      const date = new Date(student[`g${i} date`]);
-      return date >= new Date();
-    });
-    const nextModule = filteredModules.sort((a, b) => new Date(a[`g${i} date`]) - new Date(b[`g${i} date`]))[0];
-    if (nextModule) {
-      const formattedDueDate = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(nextModule[`g${i} date`]));
-      footer4.textContent = `Next Module: ${formattedDueDate}`;
-    } else {
-      footer4.textContent = 'No upcoming Module';
-    }
+
+  // Update the footer based on the next module deadline
+  const filteredModules = students.filter(student => {
+    const date = new Date(student[`g${i} date`]);
+    return date >= new Date();
+  });
+  const nextModule = filteredModules.sort((a, b) => new Date(a[`g${i} date`]) - new Date(b[`g${i} date`]))[0];
+  if (nextModule) {
+    const formattedDueDate = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(nextModule[`g${i} date`]));
+    footer4.textContent = `Next Module: ${formattedDueDate}`;
+  } else {
+    footer4.textContent = 'No upcoming Module';
+  }
+  let moduleUrl = `Group.html?id=${id}`;
+  seeMore4.href = moduleUrl;
+  let module = await fetch(moduleUrl);
+  let moduleData = await module.json();
+  localStorage.setItem('moduleData', JSON.stringify(moduleData));
+  window.open(moduleUrl);
 }
-
-
 
 // const page = document.querySelector('body');
 
