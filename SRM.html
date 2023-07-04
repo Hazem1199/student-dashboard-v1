@@ -154,7 +154,7 @@
     <div class="content  ">
       <!--start head  -->
 
-      <div class="head p-15 bg-white between-flex">
+      <div class="head bg-white between-flex">
         <form class="searchCon">
           <div class="search p-relative">
             <input class="rad-15" type="search" id="searchInput" name="search" placeholder="Write ID....">
@@ -163,6 +163,9 @@
             <button class="search-button"><i class="fa fa-search"></i></button>
           </div>
         </form>
+        <div>
+          <img style="width: 60px;" src="./imgs/1615473689936.jfif" alt="" srcset="">
+        </div>
         <div class="icons d-flex align-center">
           <span class="notification p-relative">
             <i class="fa-regular fa-bell fa-lg"></i>
@@ -393,21 +396,6 @@
               </div>
             </div>
             <div class="mt-20 row">
-              <div class="col-lg-4 mb-3">
-                <div class="card cards" style="max-width: 540px;">
-                  <div class="row g-0">
-                    <div class="col-md-4">
-                      <img src="./imgs/paper.png" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                      <div class="card-body">
-                        <p class="card-text text-center"><small class="text-muted">Papers</small></p>
-                        <p class="card-text text-center fs-3 fw-bold">3/4</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
               <a href="" class="seeMore4 col-lg-4 mb-3">
                 <div class="card cards">
                   <div class="row g-0">
@@ -421,6 +409,22 @@
                       </div>
                     </div>
                     <div class="p-6 card-footer footer4 text-muted text-center"></div>
+                  </div>
+                </div>
+              </a>
+              <a class="seeMore5 col-lg-4 mb-3">
+                <div class="card cards">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="./imgs/paper.png" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body pl-0">
+                        <p class="card-text text-center"><small class="text-muted">Papers</small></p>
+                        <p class="card-text text-center fs-3 fw-bold num-Papers" id="paperCount"> </p>
+                      </div>
+                    </div>
+                    <div class="p-6 card-footer footer5 text-muted text-center"></div>
                   </div>
                 </div>
               </a>
@@ -602,6 +606,7 @@
   <script src="./js pages/com-card.js"></script>
   <script src="./js pages/deadlines.js"></script>
   <script src="./js pages/group-card.js"></script>
+  <script src="./js pages/paper-card.js"></script>
 </body>
 
 </html>

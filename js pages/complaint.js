@@ -140,80 +140,107 @@
 // //    // إخفاء popup
 // //    const popupContainer = document.getElementById("popupContainer");
 // //    popupContainer.style.display = "none";
- 
+
 // // }
 
 // // form.addEventListener('submit', action);
 
+var loadingDiv = document.querySelector('.loading-div')
+
+var overlay = document.createElement("div");
+overlay.style.position = "fixed";
+overlay.style.display = "none";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.height = "100%";
+overlay.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
+overlay.style.backdropFilter = "blur(5px)";
+overlay.style.zIndex = "1";
+document.body.appendChild(overlay);
+
+function change() {
+  loadingDiv.style.display = "block";
+  overlay.style.display = "block";
+}
+
+function hide() {
+  overlay.style.display = "none";
+  loadingDiv.style.display = "none";
+}
 
 
 async function getInfoComplaint(id) {
-    const baseUrl = `https://script.google.com/macros/s/AKfycbwO4ZvcLywR7K06KqYbDNau2VuVENY_3IAaJHvLlixq1W2ANSQNYnMpB_sdFEphHjMg/exec`;
-    let url = baseUrl;
-    if (id) {
-      url += `?id=${id}`;
-    }
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
+  const baseUrl = `https://script.google.com/macros/s/AKfycbwO4ZvcLywR7K06KqYbDNau2VuVENY_3IAaJHvLlixq1W2ANSQNYnMpB_sdFEphHjMg/exec`;
+  let url = baseUrl;
+  if (id) {
+    url += `?id=${id}`;
   }
-  
-  async function showComplaint(id) {
-    const complaints = await getInfoComplaint(id);
-    let tableBody = document.querySelector('.divTableBody');
-    tableBody.innerHTML = '';
-    complaints.filter(complaint => complaint.ID == id).forEach(complaint => {
-      let row = document.createElement('div');
-      row.classList.add('divTableRow');
-      let dateCell = document.createElement('div');
-      dateCell.classList.add('divTableCell');
-      dateCell.textContent = complaint.Date;
-      row.appendChild(dateCell);
-      let requestCell = document.createElement('div');
-      requestCell.classList.add('divTableCell');
-      requestCell.textContent = complaint.Message;
-      row.appendChild(requestCell);
-      let exManagerCell = document.createElement('div');
-      exManagerCell.classList.add('divTableCell');
-      exManagerCell.textContent = complaint.exManager;
-      row.appendChild(exManagerCell);
-      let actionCell = document.createElement('div');
-      actionCell.classList.add('divTableCell');
-      actionCell.textContent = complaint.status;
-      row.appendChild(actionCell);
-      let employeeCell = document.createElement('div');
-      employeeCell.classList.add('divTableCell');
-      employeeCell.textContent = complaint.emplyee;
-      row.appendChild(employeeCell);
-      tableBody.appendChild(row);
-    });
-  }
-  
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get('id');
-  showComplaint(id);
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}
 
+async function showComplaint(id) {
+  change()
+  const complaints = await getInfoComplaint(id);
+  let tableBody = document.querySelector('.divTableBody');
+  tableBody.innerHTML = '';
+  complaints.filter(complaint => complaint.ID == id).forEach(complaint => {
+    let row = document.createElement('div');
+    row.classList.add('divTableRow');
+    let dateCell = document.createElement('div');
+    dateCell.classList.add('divTableCell');
+    dateCell.textContent = complaint.Date;
+    row.appendChild(dateCell);
+    let requestCell = document.createElement('div');
+    requestCell.classList.add('divTableCell');
+    requestCell.textContent = complaint.Message;
+    row.appendChild(requestCell);
+    let exManagerCell = document.createElement('div');
+    exManagerCell.classList.add('divTableCell');
+    exManagerCell.textContent = complaint.exManager;
+    row.appendChild(exManagerCell);
+    let actionCell = document.createElement('div');
+    actionCell.classList.add('divTableCell');
+    actionCell.textContent = complaint.status;
+    row.appendChild(actionCell);
+    let employeeCell = document.createElement('div');
+    employeeCell.classList.add('divTableCell');
+    employeeCell.textContent = complaint.emplyee;
+    row.appendChild(employeeCell);
+    tableBody.appendChild(row);
+  });
+  hide()
+}
 
-  window.onload = function () {
-    const sidebar = document.querySelector(".sidebar");
-    const closeBtn = document.querySelector("#btn");
-    const searchBtn = document.querySelector(".bx-search")
-  
-    closeBtn.addEventListener("click", function () {
-      sidebar.classList.toggle("open")
-      menuBtnChange()
-    })
-  
-    searchBtn.addEventListener("click", function () {
-      sidebar.classList.toggle("open")
-      menuBtnChange()
-    })
-  
-    function menuBtnChange() {
-      if (sidebar.classList.contains("open")) {
-        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right")
-      } else {
-        closeBtn.classList.replace("bx-menu-alt-right", "bx-menu")
-      }
+const params = new URLSearchParams(window.location.search);
+const id = params.get('id');
+showComplaint(id);
+
+// add an event listener to the window object to run the `change()` function when a new window is opened
+window.addEventListener('open', change);
+
+window.onload = function () {
+  const sidebar = document.querySelector(".sidebar");
+  const closeBtn = document.querySelector("#btn");
+  const searchBtn = document.querySelector(".bx-search")
+
+  closeBtn.addEventListener("click", function () {
+    sidebar.classList.toggle("open")
+    menuBtnChange()
+  })
+
+  searchBtn.addEventListener("click", function () {
+    sidebar.classList.toggle("open")
+    menuBtnChange()
+  })
+
+  function menuBtnChange() {
+    if (sidebar.classList.contains("open")) {
+      closeBtn.classList.replace("bx-menu", "bx-menu-alt-right")
+    } else {
+      closeBtn.classList.replace("bx-menu-alt-right", "bx-menu")
     }
   }
+}

@@ -116,6 +116,10 @@ ul {
   margin-left: 5%;
 }
 
+.head {
+  padding: 0px 15px;
+}
+
 .head .search::before {
   font-family: var(--fa-style-family-classic);
   content: "\f002";

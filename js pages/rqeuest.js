@@ -143,7 +143,29 @@
 
 // form.addEventListener('submit', action);
 
+var loadingDiv = document.querySelector('.loading-div')
 
+var overlay = document.createElement("div");
+overlay.style.position = "fixed";
+overlay.style.display = "none";
+overlay.style.top = "0";
+overlay.style.left = "0";
+overlay.style.width = "100%";
+overlay.style.height = "100%";
+overlay.style.backgroundColor = "rgba(255, 255, 255, 0.5)";
+overlay.style.backdropFilter = "blur(5px)";
+overlay.style.zIndex = "1";
+document.body.appendChild(overlay);
+
+function change() {
+  loadingDiv.style.display = "block";
+  overlay.style.display = "block";
+}
+
+function hide() {
+  overlay.style.display = "none";
+  loadingDiv.style.display = "none";
+}
 
 async function getInfoRequest(id) {
   const baseUrl = `https://script.google.com/macros/s/AKfycbzoB5fiDd4YOJFeeKct55UJojNEecJJRew8gNQEwNVwexgDYP7gV7CBNHbb3fn-RowS/exec`;
@@ -157,6 +179,7 @@ async function getInfoRequest(id) {
 }
 
 async function showRequests(id) {
+  change()
   const requests = await getInfoRequest(id);
   let tableBody = document.querySelector('.divTableBody');
   tableBody.innerHTML = '';
@@ -194,13 +217,15 @@ async function showRequests(id) {
   requestCountDiv.textContent = `Number of request results: ${requestCount}`;
   requestCountDiv.classList.add('requestCount');
   tableBody.appendChild(requestCountDiv);
+  hide() // hide the loading overlay once the requests are shown
 }
-
 
 const params = new URLSearchParams(window.location.search);
 const id = params.get('id');
 showRequests(id);
 
+// add an event listener to the window object to run the `change()` function when a new window is opened
+window.addEventListener('open', change);
 
 window.onload = function () {
   const sidebar = document.querySelector(".sidebar");
@@ -225,5 +250,3 @@ window.onload = function () {
     }
   }
 }
-
-
