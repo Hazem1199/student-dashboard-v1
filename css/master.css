@@ -117,7 +117,7 @@ ul {
 }
 
 .head {
-  padding: 0px 15px;
+  padding: 10px 15px 10px 30px;
 }
 
 .head .search::before {

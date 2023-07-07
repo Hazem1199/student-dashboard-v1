@@ -157,41 +157,54 @@ async function showAllGroup(id) {
                   <td>${grade}</td>
                   <td>${attendance}</td>
                 `
-        // Append the row to the table
-        document.querySelector('.divTableBody').appendChild(row);
+        // Check if the row is empty
+        let isEmpty = true;
+        row.querySelectorAll('td').forEach(td => {
+          if (td.textContent.trim() !== '') {
+            isEmpty = false;
+          }
+        });
+
+        // Remove the row if it is empty
+        if (group == "") {
+          row.remove();
+        } else {
+          // Append the row to the table
+          document.querySelector('.divTableBody').appendChild(row);
+        }
       }
 
-
-      // let row = document.createElement('div');
-      // row.classList.add('divTableRow');
-      // let dateCell = document.createElement('div');
-      // dateCell.classList.add('divTableCell');
-      // dateCell.textContent = student.Date;
-      // row.appendChild(dateCell);
-      // let groupCell = document.createElement('div');
-      // groupCell.classList.add('divTableCell');
-      // groupCell.textContent = student.Group;
-      // row.appendChild(groupCell);
-      // let moduleCell = document.createElement('div');
-      // moduleCell.classList.add('divTableCell');
-      // moduleCell.textContent = student.Module;
-      // row.appendChild(moduleCell);
-      // let gradeCell = document.createElement('div');
-      // gradeCell.classList.add('divTableCell');
-      // gradeCell.textContent = student.grade;
-      // row.appendChild(gradeCell);
-      // let attendanceCell = document.createElement('div');
-      // attendanceCell.classList.add('divTableCell');
-      // attendanceCell.textContent = student.attendance;
-      // row.appendChild(dateCell);
-      // tableBody.appendChild(row);
-      // // }
     })
     hide()
   } catch (error) {
     console.log(error);
   }
 }
+
+// let row = document.createElement('div');
+// row.classList.add('divTableRow');
+// let dateCell = document.createElement('div');
+// dateCell.classList.add('divTableCell');
+// dateCell.textContent = student.Date;
+// row.appendChild(dateCell);
+// let groupCell = document.createElement('div');
+// groupCell.classList.add('divTableCell');
+// groupCell.textContent = student.Group;
+// row.appendChild(groupCell);
+// let moduleCell = document.createElement('div');
+// moduleCell.classList.add('divTableCell');
+// moduleCell.textContent = student.Module;
+// row.appendChild(moduleCell);
+// let gradeCell = document.createElement('div');
+// gradeCell.classList.add('divTableCell');
+// gradeCell.textContent = student.grade;
+// row.appendChild(gradeCell);
+// let attendanceCell = document.createElement('div');
+// attendanceCell.classList.add('divTableCell');
+// attendanceCell.textContent = student.attendance;
+// row.appendChild(dateCell);
+// tableBody.appendChild(row);
+// // }
 
 
 
