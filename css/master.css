@@ -2169,5 +2169,15 @@ body {
 
 
 
-/* popup  */
+/* table of deadline   */
+.table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.tbody {
+  text-align: center;
+  padding: 10px;
+  vertical-align: middle;
+}
 

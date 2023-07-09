@@ -31,36 +31,36 @@ async function getInfoRequest() {
 
 // async function showLastRequest(id) {
 //   var requests = await getInfoRequest();
-//   // let lastRequest;
-//   // let latestDate;
-//   // for (let i = requests.length - 1; i >= 0; i--) {
-//   //   if (requests[i].ID == id) {
-//   //     if (!lastRequest) {
-//   //       lastRequest = requests[i];
-//   //       latestDate = lastRequest.Date;
-//   //     } else if (requests[i].Date > latestDate) {
-//   //       lastRequest = requests[i];
-//   //       latestDate = lastRequest.Date;
-//   //     }
-//   //   }
-//   // }
-//   // if (lastRequest) {
-//   //   let req = { Message: lastRequest.Message , Date: lastRequest.Date}
-//   //   cardText1.textContent = req.Message;
-//   //   let date = new Date(latestDate);
-//   //   let options = { year: 'numeric', month: 'short', day: 'numeric' };
-//   //   let formattedDate = date.toLocaleDateString(undefined, options);
-//   //   let formattedTime = date.toLocaleTimeString(undefined, { hour: 'numeric', minute: 'numeric' });
-//   //   cardFooter1.textContent = "last request : " + formattedDate + " at " + formattedTime;
-//   //   let requestUrl = `Request.html?id=${id}`;
-//   //   seeMore1.href = requestUrl;
-//   //   let request = await fetch(requestUrl);
-//   //   let requestData = await request.json();
-//   //   localStorage.setItem('requestData', JSON.stringify(requestData));
-//   //   window.open = requestUrl;
-//   // } else {
-//   //   cardText1.textContent = "No request found with ID " + id;
-//   // }
+// let lastRequest;
+// let latestDate;
+// for (let i = requests.length - 1; i >= 0; i--) {
+//   if (requests[i].ID == id) {
+//     if (!lastRequest) {
+//       lastRequest = requests[i];
+//       latestDate = lastRequest.Date;
+//     } else if (requests[i].Date > latestDate) {
+//       lastRequest = requests[i];
+//       latestDate = lastRequest.Date;
+//     }
+//   }
+// }
+// if (lastRequest) {
+//   let req = { Message: lastRequest.Message , Date: lastRequest.Date}
+//   cardText1.textContent = req.Message;
+//   let date = new Date(latestDate);
+//   let options = { year: 'numeric', month: 'short', day: 'numeric' };
+//   let formattedDate = date.toLocaleDateString(undefined, options);
+//   let formattedTime = date.toLocaleTimeString(undefined, { hour: 'numeric', minute: 'numeric' });
+//   cardFooter1.textContent = "last request : " + formattedDate + " at " + formattedTime;
+//   let requestUrl = `Request.html?id=${id}`;
+//   seeMore1.href = requestUrl;
+//   let request = await fetch(requestUrl);
+//   let requestData = await request.json();
+//   localStorage.setItem('requestData', JSON.stringify(requestData));
+//   window.open = requestUrl;
+// } else {
+//   cardText1.textContent = "No request found with ID " + id;
+// }
 // }
 
 
@@ -79,6 +79,15 @@ async function getInfoRequest(id) {
 
 
 const numRequest = document.querySelector('.num-request');
+const savedDataReq = sessionStorage.getItem('myDataReq');
+if (savedDataReq) {
+   const data = JSON.parse(savedDataReq);
+   // Use the data to render the page
+   numRequest.innerHTML = data.totalRequest;
+}
+
+
+
 async function showRequests(id) {
   const requests = await getInfoRequest(id);
   // let tableBody = document.querySelector('.divTableBody');
@@ -87,6 +96,7 @@ async function showRequests(id) {
   let requestCount = filteredRequests.length;
   console.log(requestCount);
   numRequest.textContent = requestCount;
+  sessionStorage.setItem('myDataReq', JSON.stringify(requestCount));
   let lastRequest;
   let latestDate;
   for (let i = requests.length - 1; i >= 0; i--) {
@@ -101,8 +111,9 @@ async function showRequests(id) {
     }
   }
   if (lastRequest) {
-    let req = { Message: lastRequest.Message , Date: lastRequest.Date}
+    let req = { Message: lastRequest.Message, Date: lastRequest.Date, totalRequest: filteredRequests.length }
     // cardText1.textContent = req.Message;
+    sessionStorage.setItem('myDataReq', JSON.stringify(req));
     let date = new Date(latestDate);
     let options = { year: 'numeric', month: 'short', day: 'numeric' };
     let formattedDate = date.toLocaleDateString(undefined, options);
@@ -117,11 +128,15 @@ async function showRequests(id) {
   } else {
     // cardText1.textContent = "No request found with ID " + id;
   }
-  
+
 }
 
+
+
 searchButton.addEventListener('click', () => {
-  const id = searchInput[0].value;
+  
+    const id = searchInput[0].value;
+    showRequests(id)
+  
   // showLastRequest(id);
-  showRequests(id)
 });

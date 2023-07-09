@@ -47,26 +47,44 @@ async function getData() {
    return data;
 }
 
+
+// Get data from session storage if it exists
+const savedData = sessionStorage.getItem('myData');
+if (savedData) {
+   const data = JSON.parse(savedData);
+   // Use the data to render the page
+   fName.innerHTML = data.Name;
+   ID.innerHTML = data.ID;
+   Email.innerHTML = data.Email;
+   Phone.innerHTML = data.Phone;
+   headName.innerHTML = data.Name.slice(0, 50);
+   pic.src = data.img;
+}
+
+
+
+
 async function display(value) {
-   change()
+   change();
    var users = await getData();
-   //console.log(users);
 
    users.forEach(element => {
       if (value == element.ID) {
-         console.log(element.Name);
-         let user = { Name: element.Name, ID: element.ID, Email: element.Email, Phone: element.Phone, img: element["Profile Pic"] }
-         fName.innerHTML = `${user.Name}`
-         ID.innerHTML = `${user.ID}`
-         Email.innerHTML = `${user.Email}`
-         Phone.innerHTML = `${user.Phone}`
-         headName.innerHTML = `${user.Name.slice(0, 50)}`
-         pic.src = `${user.img}`;
-         console.log(pic.src);
+         let user = { Name: element.Name, ID: element.ID, Email: element.Email, Phone: element.Phone, img: element["Profile Pic"] };
+         // Save the data to session storage
+         sessionStorage.setItem('myData', JSON.stringify(user));
+         // Use the data to render the page
+         fName.innerHTML = user.Name;
+         ID.innerHTML = user.ID;
+         Email.innerHTML = user.Email;
+         Phone.innerHTML = user.Phone;
+         headName.innerHTML = user.Name.slice(0, 50);
+         pic.src = user.img;
       }
    });
-   hide()
+   hide();
 }
+
 
 searchButton.addEventListener('click', (e) => {
    e.preventDefault();

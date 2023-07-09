@@ -11,6 +11,7 @@
 // var pic = document.getElementById("profile-pic")
 // var headName = document.querySelector('.headName') 
 
+const seeMore3 = document.querySelector('.seeMore3')
 
 
 
@@ -40,15 +41,21 @@ async function showDeadlines(value) {
     const nextDeadline = deadlines.find(deadline => new Date(deadline["Due Date"]) > now);
     if (numberOfPaidDeadlines === deadlineCount) {
         const numberOfUnpaidDeadlines = deadlineCount
-    numDeadline.textContent = `${numberOfUnpaidDeadlines} / ${deadlineCount}`;
-    footer3.textContent = "No upcoming deadlines";
-    }else {
-    // const numberOfUnpaidDeadlines = deadlineCount - numberOfPaidDeadlines;
-    numDeadline.textContent = `${numberOfPaidDeadlines} / ${deadlineCount}`;
-    const formattedDueDate = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' , year: 'numeric'}).format(new Date(nextDeadline["Due Date"]));
+        numDeadline.textContent = `${numberOfUnpaidDeadlines} / ${deadlineCount}`;
+        footer3.textContent = "No upcoming deadlines";
+    } else {
+        // const numberOfUnpaidDeadlines = deadlineCount - numberOfPaidDeadlines;
+        numDeadline.textContent = `${numberOfPaidDeadlines} / ${deadlineCount}`;
+        const formattedDueDate = new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(nextDeadline["Due Date"]));
         footer3.textContent = `Next deadline: ${formattedDueDate}`;
-}
+    }
 
+    let deadlineUrl = `Deadlines.html?id=${value}`;
+    seeMore3.href = deadlineUrl;
+    let deadline = await fetch(deadlineUrl);
+    let deadlineData = await deadline.json();
+    localStorage.setItem('deadlineData', JSON.stringify(deadlineData));
+    window.open = deadlineUrl;
 
 
 
@@ -64,6 +71,7 @@ async function showDeadlines(value) {
     const spinner = document.createElement('div');
     spinner.classList.add('spinner');
     document.body.appendChild(spinner);
+
 
     // for (let i = 1; i <= 12; i++) {
     // }
@@ -98,8 +106,8 @@ async function showDeadlines(value) {
     });
 
 
-    // Hide spinner element
-    document.body.removeChild(spinner);
+// Hide spinner element
+document.body.removeChild(spinner);
 
 
     // const filteredDeadlines = students.filter(student => student.ID === value);
